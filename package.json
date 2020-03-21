@@ -1,0 +1,23 @@
+{
+    "name": "pjs",
+    "displayName": "PHPJS",
+    "description": "JavaScript variant of PHP",
+    "version": "0.0.1",
+    "publisher": "dekryptor",
+    "engines": {
+        "vscode": "^1.43.0"
+    },
+    "icon": "images/icon.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Dekryptor/PHPJS"
+    },
+    "categories": [
+        "Extension Packs"
+    ],
+    "extensionPack": [ 
+        "msjsdiag.debugger-for-chrome",
+        "dbaeumer.vscode-eslint",
+        "vscode-icons-team.vscode-icons"
+    ]
+}
