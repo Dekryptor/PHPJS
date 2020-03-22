@@ -2,22 +2,59 @@
     "name": "pjs",
     "displayName": "PHPJS",
     "description": "JavaScript variant of PHP",
-    "version": "0.0.1",
     "publisher": "dekryptor",
+    "version": "0.0.1",
     "engines": {
         "vscode": "^1.43.0"
     },
     "icon": "images/icon.png",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Dekryptor/PHPJS"
+        "url": "https://github.com/dekryptor/phpjs"
     },
     "categories": [
-        "Extension Packs"
+        "Programming Languages"
     ],
-    "extensionPack": [ 
-        "msjsdiag.debugger-for-chrome",
-        "dbaeumer.vscode-eslint",
-        "vscode-icons-team.vscode-icons"
-    ]
+    "contributes": {
+        "languages": [{
+            "id": "pjs",
+            "aliases": ["pjs", "PJS"],
+            "firstLine": "^#!.*\\bnode",
+            "mimetypes": [
+                "text/javascript"
+            ],
+            "extensions": [".pjs"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [
+            {
+                "language": "pjs",
+                "scopeName": "source.pjs",
+                "path": "./syntaxes/pjs.tmLanguage.json"
+            },
+            {
+                "language": "pjs",
+				"scopeName": "text.html.pjs",
+				"path": "./syntaxes/html.tmLanguage.json",
+				"embeddedLanguages": {
+					"text.html": "html",
+					"source.pjs": "pjs",
+					"source.sql": "sql",
+					"text.xml": "xml",
+					"source.js": "javascript",
+					"source.json": "json",
+					"source.css": "css"
+				}
+            }
+        ],
+		"snippets": [
+			{
+				"language": "pjs",
+				"path": "./snippets/pjs.snippets.json"
+			}
+		]
+    },
+	"scripts": {
+		"update-grammar": "node ./build/update-grammar.js"
+	}
 }

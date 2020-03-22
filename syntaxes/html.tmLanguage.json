@@ -1,0 +1,189 @@
+{
+    "information_for_contributors": [
+      "This file has been converted from https://github.com/atom/language-php/blob/master/grammars/html.cson",
+      "If you want to provide a fix or improvement, please create a pull request against the original repository.",
+      "Once accepted there, we are happy to receive an update request."
+    ],
+    "version": "",
+    "name": "PHPJS",
+    "scopeName": "text.html.pjs",
+    "injections": {
+      "L:source.pjs string.quoted.single.sql.pjs source.sql.embedded.pjs": {
+        "patterns": [
+          {
+            "match": "(#)(\\\\'|[^'])*(?='|$)",
+            "name": "comment.line.number-sign.sql",
+            "captures": {
+              "1": {
+                "name": "punctuation.definition.comment.sql"
+              }
+            }
+          },
+          {
+            "match": "(--)(\\\\'|[^'])*(?='|$)",
+            "name": "comment.line.double-dash.sql",
+            "captures": {
+              "1": {
+                "name": "punctuation.definition.comment.sql"
+              }
+            }
+          },
+          {
+            "match": "\\\\[\\\\'`\"]",
+            "name": "constant.character.escape.pjs"
+          },
+          {
+            "match": "\"(?=((\\\\\")|[^\"'])*('|$))",
+            "name": "string.quoted.double.unclosed.sql"
+          }
+        ]
+      },
+      "L:source.pjs string.quoted.double.sql.pjs source.sql.embedded.pjs": {
+        "patterns": [
+          {
+            "match": "(#)(\\\\\"|[^\"])*(?=\"|$)",
+            "name": "comment.line.number-sign.sql",
+            "captures": {
+              "1": {
+                "name": "punctuation.definition.comment.sql"
+              }
+            }
+          },
+          {
+            "match": "(--)(\\\\\"|[^\"])*(?=\"|$)",
+            "name": "comment.line.double-dash.sql",
+            "captures": {
+              "1": {
+                "name": "punctuation.definition.comment.sql"
+              }
+            }
+          },
+          {
+            "match": "\\\\[\\\\'`\"]",
+            "name": "constant.character.escape.pjs"
+          },
+          {
+            "match": "(')([^'\\\\]*)(')",
+            "name": "string.quoted.single.sql",
+            "captures": {
+              "1": {
+                "name": "punctuation.definition.string.begin.sql"
+              },
+              "2": {
+                "patterns": [
+                  {
+                    "include": "source.pjs#interpolation_double_quoted"
+                  }
+                ]
+              },
+              "3": {
+                "name": "punctuation.definition.string.end.sql"
+              }
+            }
+          },
+          {
+            "match": "(`)([^`\\\\]*)(`)",
+            "name": "string.quoted.other.backtick.sql",
+            "captures": {
+              "1": {
+                "name": "punctuation.definition.string.begin.sql"
+              },
+              "2": {
+                "patterns": [
+                  {
+                    "include": "source.pjs#interpolation_double_quoted"
+                  }
+                ]
+              },
+              "3": {
+                "name": "punctuation.definition.string.end.sql"
+              }
+            }
+          },
+          {
+            "match": "'(?=((\\\\')|[^'\"])*(\"|$))",
+            "name": "string.quoted.single.unclosed.sql"
+          },
+          {
+            "include": "source.pjs#interpolation_double_quoted"
+          }
+        ]
+      },
+      "text.html.pjs - (meta.embedded | meta.tag), L:((text.html.pjs meta.tag) - (meta.embedded.block.pjs | meta.embedded.line.pjs)), L:(source.js - (meta.embedded.block.pjs | meta.embedded.line.pjs)), L:(source.css - (meta.embedded.block.pjs | meta.embedded.line.pjs))": {
+        "patterns": [
+          {
+            "include": "#pjs-tag"
+          }
+        ]
+      }
+    },
+    "patterns": [
+      {
+        "begin": "\\A#!",
+        "beginCaptures": {
+          "0": {
+            "name": "punctuation.definition.comment.pjs"
+          }
+        },
+        "end": "$",
+        "name": "comment.line.shebang.pjs"
+      },
+      {
+        "include": "text.html.derivative"
+      }
+    ],
+    "repository": {
+      "pjs-tag": {
+        "patterns": [
+          {
+            "begin": "<\\?(?i:PJS|=)?(?![^?]*\\?>)",
+            "beginCaptures": {
+              "0": {
+                "name": "punctuation.section.embedded.begin.pjs"
+              }
+            },
+            "end": "(\\?)>",
+            "endCaptures": {
+              "0": {
+                "name": "punctuation.section.embedded.end.pjs"
+              },
+              "1": {
+                "name": "source.pjs"
+              }
+            },
+            "name": "meta.embedded.block.pjs",
+            "contentName": "source.pjs",
+            "patterns": [
+              {
+                "include": "source.pjs"
+              }
+            ]
+          },
+          {
+            "begin": "<\\?(?i:PJS|=)?",
+            "beginCaptures": {
+              "0": {
+                "name": "punctuation.section.embedded.begin.pjs"
+              }
+            },
+            "end": "(\\?)>",
+            "endCaptures": {
+              "0": {
+                "name": "punctuation.section.embedded.end.pjs"
+              },
+              "1": {
+                "name": "source.pjs"
+              }
+            },
+            "name": "meta.embedded.line.pjs",
+            "contentName": "source.pjs",
+            "patterns": [
+              {
+                "include": "source.pjs"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }

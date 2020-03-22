@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Printing a text as log to the browser's console</title>
+	</head>
+	<body>
+		<?PJS
+			function conlog(text) { print(`<script>console.log("${text}")</script>`); }
+			
+			conlog('Hello Human!');
+		?>
+	</body>
+</html>
